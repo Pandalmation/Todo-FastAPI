@@ -114,15 +114,15 @@ def create_task(task_id: int, app:Task):
 
 #update task
 @app.put("/update-task/{task_id}")
-def update_task(task_id:int, app:UpdateTask):
+def update_task(task_id:int, app: UpdateTask):
+    if task_id not in tasks:
+        return {"Error": "The task does not exist. Please check the task ID again."}
     if app.title != None:
         tasks[task_id].title = app.title
     if app.description != None:
         tasks[task_id].description = app.description
     if app.complete != None:
         tasks[task_id].complete = app.complete
-    if task_id not in tasks:
-        return {"Error": "The task does not exist. Please check the task ID again."}
     return tasks[task_id]
 
 #delete task
